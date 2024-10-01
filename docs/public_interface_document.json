@@ -1,0 +1,367 @@
+{
+  "package_name": "com.example.flutter_cubit_app",
+  "project_description": "A simple Flutter app with a login screen and a home screen using the Cubit pattern for state management.",
+  "architecture_overview": "The project follows a highly modularized architecture. The lib directory is organized into screens, cubits, models, and widgets. Each screen has its own cubit for state management.",
+  "folder_structure": {
+    "lib": {
+      "screens": {
+        "login_screen.dart": {},
+        "home_screen.dart": {}
+      },
+      "cubits": {
+        "login_cubit.dart": {},
+        "login_state.dart": {},
+        "home_cubit.dart": {},
+        "home_state.dart": {}
+      },
+      "models": {
+        "user_model.dart": {}
+      },
+      "widgets": {
+        "login_form.dart": {},
+        "logout_button.dart": {}
+      },
+      "main.dart": {}
+    }
+  },
+  "files": [
+    {
+      "name": "lib/main.dart",
+      "description": "The main entry point of the application. It provides the necessary cubits using BlocProvider.",
+      "class_diagram": "@startuml\nclass MyApp {\n}\n@enduml",
+      "methods": [
+        {
+          "name": "main",
+          "description": "The main function of the application.",
+          "parameters": null,
+          "return_type": "void"
+        },
+        {
+          "name": "build",
+          "description": "Builds the main widget of the application.",
+          "parameters": [
+            "BuildContext context"
+          ],
+          "return_type": "Widget"
+        }
+      ],
+      "dependencies": [
+        "package:flutter/material.dart",
+        "package:flutter_bloc/flutter_bloc.dart",
+        "cubits/login_cubit.dart",
+        "cubits/home_cubit.dart",
+        "screens/login_screen.dart",
+        "screens/home_screen.dart",
+        "cubits/login_state.dart"
+      ]
+    },
+    {
+      "name": "lib/screens/login_screen.dart",
+      "description": "Defines the login screen with email and password fields.",
+      "class_diagram": "@startuml\nclass LoginScreen {\n}\n@enduml",
+      "methods": [
+        {
+          "name": "build",
+          "description": "Builds the login screen widget.",
+          "parameters": [
+            "BuildContext context"
+          ],
+          "return_type": "Widget"
+        }
+      ],
+      "dependencies": [
+        "package:flutter/material.dart",
+        "../widgets/login_form.dart"
+      ]
+    },
+    {
+      "name": "lib/screens/home_screen.dart",
+      "description": "Defines the home screen with a logout button.",
+      "class_diagram": "@startuml\nclass HomeScreen {\n}\n@enduml",
+      "methods": [
+        {
+          "name": "build",
+          "description": "Builds the home screen widget.",
+          "parameters": [
+            "BuildContext context"
+          ],
+          "return_type": "Widget"
+        }
+      ],
+      "dependencies": [
+        "package:flutter/material.dart",
+        "package:flutter_bloc/flutter_bloc.dart",
+        "../widgets/logout_button.dart",
+        "../cubits/home_cubit.dart"
+      ]
+    },
+    {
+      "name": "lib/cubits/login_cubit.dart",
+      "description": "Manages the state for the login screen.",
+      "class_diagram": "@startuml\nclass LoginCubit {\n}\n@enduml",
+      "methods": [
+        {
+          "name": "login",
+          "description": "Attempts to log in the user with the provided email and password.",
+          "parameters": [
+            "String email",
+            "String password"
+          ],
+          "return_type": "void"
+        }
+      ],
+      "dependencies": [
+        "package:bloc/bloc.dart",
+        "login_state.dart"
+      ]
+    },
+    {
+      "name": "lib/cubits/login_state.dart",
+      "description": "Defines the state for the login screen.",
+      "class_diagram": "@startuml\nclass LoginState {\n  LoginStatus status\n  String email\n  String password\n  String errorMessage\n  +LoginState copyWith(LoginStatus? status, String? email, String? password, String? errorMessage)\n  +List<Object> get props\n}\n@enduml",
+      "methods": [
+        {
+          "name": "copyWith",
+          "description": "Creates a copy of the current LoginState with optional new values.",
+          "parameters": [
+            "LoginStatus? status",
+            "String? email",
+            "String? password",
+            "String? errorMessage"
+          ],
+          "return_type": "LoginState"
+        },
+        {
+          "name": "props",
+          "description": "Returns a list of properties for comparison.",
+          "parameters": null,
+          "return_type": "List<Object>"
+        }
+      ],
+      "dependencies": [
+        "package:equatable/equatable.dart"
+      ]
+    },
+    {
+      "name": "lib/cubits/home_cubit.dart",
+      "description": "Manages the state for the home screen.",
+      "class_diagram": "@startuml\nclass HomeCubit {\n}\n@enduml",
+      "methods": [
+        {
+          "name": "logout",
+          "description": "Logs out the user.",
+          "parameters": null,
+          "return_type": "void"
+        }
+      ],
+      "dependencies": [
+        "package:bloc/bloc.dart",
+        "home_state.dart"
+      ]
+    },
+    {
+      "name": "lib/cubits/home_state.dart",
+      "description": "Defines the state for the home screen.",
+      "class_diagram": "@startuml\nclass HomeState {\n}\n@enduml",
+      "methods": [],
+      "dependencies": [
+        "package:equatable/equatable.dart"
+      ]
+    },
+    {
+      "name": "lib/models/user_model.dart",
+      "description": "Defines the user model.",
+      "class_diagram": "@startuml\nclass UserModel {\n  - String id\n  - String email\n  + UserModel(String id, String email)\n  + factory UserModel.fromJson(Map<String, dynamic> json)\n  + Map<String, dynamic> toJson()\n  + List<Object?> get props\n}\n@enduml",
+      "methods": [
+        {
+          "name": "UserModel",
+          "description": "Constructor for the UserModel class.",
+          "parameters": [
+            "String id",
+            "String email"
+          ],
+          "return_type": null
+        },
+        {
+          "name": "fromJson",
+          "description": "Factory constructor to create a UserModel instance from a JSON map.",
+          "parameters": [
+            "Map<String, dynamic> json"
+          ],
+          "return_type": "UserModel"
+        },
+        {
+          "name": "toJson",
+          "description": "Converts the UserModel instance to a JSON map.",
+          "parameters": [],
+          "return_type": "Map<String, dynamic>"
+        },
+        {
+          "name": "props",
+          "description": "List of properties for the Equatable package.",
+          "parameters": null,
+          "return_type": "List<Object?>"
+        }
+      ],
+      "dependencies": [
+        "package:equatable/equatable.dart"
+      ]
+    },
+    {
+      "name": "lib/widgets/login_form.dart",
+      "description": "Defines a widget for the login form.",
+      "class_diagram": "@startuml\nclass LoginForm {\n}\n@enduml",
+      "methods": [
+        {
+          "name": "build",
+          "description": "Builds the login form widget.",
+          "parameters": [
+            "BuildContext context"
+          ],
+          "return_type": "Widget"
+        }
+      ],
+      "dependencies": [
+        "package:flutter/material.dart",
+        "package:flutter_bloc/flutter_bloc.dart",
+        "../cubits/login_cubit.dart",
+        "../cubits/login_state.dart"
+      ]
+    },
+    {
+      "name": "lib/widgets/logout_button.dart",
+      "description": "Defines a widget for the logout button.",
+      "class_diagram": "@startuml\nclass LogoutButton {\n}\n@enduml",
+      "methods": [
+        {
+          "name": "build",
+          "description": "Builds the logout button widget.",
+          "parameters": [
+            "BuildContext context"
+          ],
+          "return_type": "Widget"
+        }
+      ],
+      "dependencies": [
+        "package:flutter/material.dart",
+        "package:flutter_bloc/flutter_bloc.dart",
+        "../cubits/home_cubit.dart"
+      ]
+    }
+  ],
+  "widgets": [
+    {
+      "name": "LoginScreen",
+      "type": "StatelessWidget",
+      "description": "The login screen with email and password fields.",
+      "file_name": "lib/screens/login_screen.dart"
+    },
+    {
+      "name": "HomeScreen",
+      "type": "StatelessWidget",
+      "description": "The home screen with a logout button.",
+      "file_name": "lib/screens/home_screen.dart"
+    },
+    {
+      "name": "LoginForm",
+      "type": "StatelessWidget",
+      "description": "A form widget for logging in with email and password.",
+      "file_name": "lib/widgets/login_form.dart"
+    },
+    {
+      "name": "LogoutButton",
+      "type": "StatelessWidget",
+      "description": "A button widget for logging out.",
+      "file_name": "lib/widgets/logout_button.dart"
+    }
+  ],
+  "cubits": [
+    {
+      "name": "LoginCubit",
+      "state": "LoginState",
+      "description": "Manages the state for the login screen.",
+      "methods": [
+        {
+          "name": "login",
+          "description": "Attempts to log in the user with the provided email and password.",
+          "parameters": [
+            "String email",
+            "String password"
+          ],
+          "return_type": "void"
+        }
+      ],
+      "file_name": "lib/cubits/login_cubit.dart"
+    },
+    {
+      "name": "HomeCubit",
+      "state": "HomeState",
+      "description": "Manages the state for the home screen.",
+      "methods": [
+        {
+          "name": "logout",
+          "description": "Logs out the user.",
+          "parameters": null,
+          "return_type": "void"
+        }
+      ],
+      "file_name": "lib/cubits/home_cubit.dart"
+    }
+  ],
+  "models": [
+    {
+      "name": "UserModel",
+      "description": "Represents the user data model.",
+      "attributes": [
+        "String id",
+        "String email"
+      ],
+      "file_name": "lib/models/user_model.dart"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "flutter",
+      "version": "2.10.3",
+      "purpose": "Flutter framework for building the UI."
+    },
+    {
+      "name": "flutter_bloc",
+      "version": "8.0.1",
+      "purpose": "State management using Cubit and Bloc."
+    },
+    {
+      "name": "bloc",
+      "version": "8.0.1",
+      "purpose": "Core package for Cubit and Bloc state management."
+    }
+  ],
+  "sequence_diagram": "@startuml\nactor User\nUser -> LoginScreen : open\nLoginScreen -> LoginCubit : login(email, password)\nLoginCubit -> LoginState : emit(LoginSuccess)\nLoginState -> HomeScreen : navigate\nHomeScreen -> HomeCubit : logout\nHomeCubit -> HomeState : emit(LoggedOut)\nHomeState -> LoginScreen : navigate\n@enduml",
+  "state_management_flow": "State is managed using Cubit. The LoginCubit manages the state for the login screen and emits a LoginSuccess state upon successful login, which navigates to the home screen. The HomeCubit handles the logout action and navigates back to the login screen.",
+  "navigation_flow": "The app starts with the login screen. Upon successful login, the user is navigated to the home screen. The home screen has a logout button that navigates the user back to the login screen.",
+  "pubspec_yaml": {
+    "name": "flutter_cubit_app",
+    "description": "A simple Flutter app with a login screen and a home screen using the Cubit pattern for state management.",
+    "version": "1.0.0",
+    "environment": {
+      "sdk": ">=2.17.0 <3.0.0"
+    },
+    "dependencies": {
+      "flutter": {
+        "sdk": "flutter"
+      },
+      "flutter_bloc": "^8.0.1",
+      "bloc": "^8.0.1"
+    },
+    "dev_dependencies": {
+      "flutter_test": {
+        "sdk": "flutter"
+      },
+      "bloc_test": "^8.0.1",
+      "mocktail": "^0.2.0"
+    },
+    "flutter": {
+      "uses-material-design": true
+    }
+  }
+}

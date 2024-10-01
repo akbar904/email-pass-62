@@ -1,2 +1,12 @@
+import 'package:equatable/equatable.dart';
 
-class HomeState {}
+abstract class HomeState extends Equatable {
+  const HomeState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class HomeInitial extends HomeState {}
+
+class HomeLoggedOutState extends HomeState {}

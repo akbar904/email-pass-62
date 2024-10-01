@@ -47,9 +47,12 @@
       ],
       "dependencies": [
         "package:flutter/material.dart",
+        "package:flutter_bloc/flutter_bloc.dart",
         "cubits/login_cubit.dart",
+        "cubits/home_cubit.dart",
         "screens/login_screen.dart",
-        "screens/home_screen.dart"
+        "screens/home_screen.dart",
+        "cubits/login_state.dart"
       ]
     },
     {
@@ -68,7 +71,7 @@
       ],
       "dependencies": [
         "package:flutter/material.dart",
-        "widgets/login_form.dart"
+        "../widgets/login_form.dart"
       ]
     },
     {
@@ -87,7 +90,9 @@
       ],
       "dependencies": [
         "package:flutter/material.dart",
-        "widgets/logout_button.dart"
+        "package:flutter_bloc/flutter_bloc.dart",
+        "../widgets/logout_button.dart",
+        "../cubits/home_cubit.dart"
       ]
     },
     {
@@ -113,9 +118,29 @@
     {
       "name": "lib/cubits/login_state.dart",
       "description": "Defines the state for the login screen.",
-      "class_diagram": "@startuml\nclass LoginState {\n}\n@enduml",
-      "methods": [],
-      "dependencies": []
+      "class_diagram": "@startuml\nclass LoginState {\n  LoginStatus status\n  String email\n  String password\n  String errorMessage\n  +LoginState copyWith(LoginStatus? status, String? email, String? password, String? errorMessage)\n  +List<Object> get props\n}\n@enduml",
+      "methods": [
+        {
+          "name": "copyWith",
+          "description": "Creates a copy of the current LoginState with optional new values.",
+          "parameters": [
+            "LoginStatus? status",
+            "String? email",
+            "String? password",
+            "String? errorMessage"
+          ],
+          "return_type": "LoginState"
+        },
+        {
+          "name": "props",
+          "description": "Returns a list of properties for comparison.",
+          "parameters": null,
+          "return_type": "List<Object>"
+        }
+      ],
+      "dependencies": [
+        "package:equatable/equatable.dart"
+      ]
     },
     {
       "name": "lib/cubits/home_cubit.dart",
@@ -139,14 +164,48 @@
       "description": "Defines the state for the home screen.",
       "class_diagram": "@startuml\nclass HomeState {\n}\n@enduml",
       "methods": [],
-      "dependencies": []
+      "dependencies": [
+        "package:equatable/equatable.dart"
+      ]
     },
     {
       "name": "lib/models/user_model.dart",
       "description": "Defines the user model.",
-      "class_diagram": "@startuml\nclass UserModel {\n}\n@enduml",
-      "methods": [],
-      "dependencies": []
+      "class_diagram": "@startuml\nclass UserModel {\n  - String id\n  - String email\n  + UserModel(String id, String email)\n  + factory UserModel.fromJson(Map<String, dynamic> json)\n  + Map<String, dynamic> toJson()\n  + List<Object?> get props\n}\n@enduml",
+      "methods": [
+        {
+          "name": "UserModel",
+          "description": "Constructor for the UserModel class.",
+          "parameters": [
+            "String id",
+            "String email"
+          ],
+          "return_type": null
+        },
+        {
+          "name": "fromJson",
+          "description": "Factory constructor to create a UserModel instance from a JSON map.",
+          "parameters": [
+            "Map<String, dynamic> json"
+          ],
+          "return_type": "UserModel"
+        },
+        {
+          "name": "toJson",
+          "description": "Converts the UserModel instance to a JSON map.",
+          "parameters": [],
+          "return_type": "Map<String, dynamic>"
+        },
+        {
+          "name": "props",
+          "description": "List of properties for the Equatable package.",
+          "parameters": null,
+          "return_type": "List<Object?>"
+        }
+      ],
+      "dependencies": [
+        "package:equatable/equatable.dart"
+      ]
     },
     {
       "name": "lib/widgets/login_form.dart",
@@ -165,7 +224,8 @@
       "dependencies": [
         "package:flutter/material.dart",
         "package:flutter_bloc/flutter_bloc.dart",
-        "cubits/login_cubit.dart"
+        "../cubits/login_cubit.dart",
+        "../cubits/login_state.dart"
       ]
     },
     {
@@ -185,7 +245,7 @@
       "dependencies": [
         "package:flutter/material.dart",
         "package:flutter_bloc/flutter_bloc.dart",
-        "cubits/home_cubit.dart"
+        "../cubits/home_cubit.dart"
       ]
     }
   ],
